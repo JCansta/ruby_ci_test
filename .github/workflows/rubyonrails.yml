@@ -42,6 +42,4 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake spec
-      - name: rubocop
-        run: bundle exec rubocop -F
 
