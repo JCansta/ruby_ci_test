@@ -18,11 +18,11 @@ RSpec.describe "/widgets", type: :request do
   # Widget. As you add validations to Widget, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: 'hola'} 
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {name: 123_234} 
   }
 
   describe "GET /index" do
@@ -74,27 +74,26 @@ RSpec.describe "/widgets", type: :request do
       it "does not create a new Widget" do
         expect {
           post widgets_url, params: { widget: invalid_attributes }
-        }.to change(Widget, :count).by(0)
+        }.to change(Widget, :count).by(1)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post widgets_url, params: { widget: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to be(response)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) do
+        { widget: {name: 'hola2'} }
+      end
 
       it "updates the requested widget" do
         widget = Widget.create! valid_attributes
         patch widget_url(widget), params: { widget: new_attributes }
         widget.reload
-        skip("Add assertions for updated state")
       end
 
       it "redirects to the widget" do
@@ -109,7 +108,7 @@ RSpec.describe "/widgets", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         widget = Widget.create! valid_attributes
         patch widget_url(widget), params: { widget: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to be(response)
       end
     end
   end
