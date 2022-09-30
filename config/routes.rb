@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :widgets
   constraints subdomain: /.*/ do
     resources :articles
   end
