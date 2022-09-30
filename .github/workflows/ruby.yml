@@ -19,8 +19,8 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: ruby_ci_test_production
-          POSTGRES_USER: ruby_ci_test
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
