@@ -42,5 +42,8 @@ jobs:
       - name: Run tests
         run: bin/rake spec
       - name: Run Rubocop
-        run: rubocop
-
+        uses: reviewdog/action-rubocop@v2
+        with:
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+          reporter: github-pr-review # Default is github-pr-check
