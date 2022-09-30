@@ -27,6 +27,8 @@ jobs:
       - name: step 1
         ## Reference your environment variables
         run: echo "The prefix key is:${{env.DATABASE_PREFIX}}"
+      - name: webpacker
+        run: bin/rails webpacker:install
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
