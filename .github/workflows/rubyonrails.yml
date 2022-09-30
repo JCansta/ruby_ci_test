@@ -1,0 +1,40 @@
+name: CI
+on:  [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres: 
+        image: postgres:11-alpine
+        ports: ['5432:5432']
+        env:
+          DATABASE_PREFIX: warehouse
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
+      # Add or replace dependency steps here
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa # v1.115.3
+        with:
+          bundler-cache: true
+      # Add or replace database setup steps here
+      - name: step 1
+        ## Reference your environment variables
+        run: echo "The prefix key is:${{env.DATABASE_PREFIX}}"
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      # Add or replace test runners here
+      - name: Run tests
+        run: bundle exec rspec
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+          reporter: github-pr-review
