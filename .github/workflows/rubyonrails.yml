@@ -42,4 +42,8 @@ jobs:
       - name: Run tests
         run: bin/rake spec
       - name: rubocop
-        run: bundle exec rubocop -F
+        uses: reviewdog/action-rubocop@v2
+        with:
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+          reporter: github-pr-review
