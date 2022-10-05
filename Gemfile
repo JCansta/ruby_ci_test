@@ -58,3 +58,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "rspec-rails", group: [:development, :test]
 
 gem 'rubocop', require: false
+
+gem "haml"
