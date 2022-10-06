@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.where(tenant_id: @author.id)
+      @articles = Article.where(tenant_id: @author.id)
   end
 
   # GET /articles/1 or /articles/1.json
